@@ -62,7 +62,7 @@
     },
 
 
-/*
+    /*
          _             _     _
      ___| |_ __ _ _ __| |_  | |__   ___ _ __ ___ _
     / __| __/ _` | '__| __| | '_ \ / _ \ '__/ _ (_)
@@ -78,15 +78,37 @@
     // --------------------------------------------------------------
     //
     // test if a specific row on this board contains a conflict
-    hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+   
+    hasRowConflictAt: function(rowIndex) { 
+      // console.log(this.get()) ;
+      var counter = 0;
+      var rowArr = this.get(rowIndex);
+      //console.log(rowArr);
+      for (var i = 0; i < rowArr.length; i++) {
+        if (rowArr[i] === 1) {
+          counter++;
+        }
+      }
+      if (counter > 1) {
+        return true;
+      } else {
+        return false;
+      }
     },
 
     // test if any rows on this board contain conflicts
-    hasAnyRowConflicts: function() {
-      return false; // fixme
-    },
+    hasAnyRowConflicts: function() { 
+      //entire chessboard?
+      //iterate through and check each row using hasRowConflictat();
+      var board = this.rows();
 
+      for (var i = 0; i < board.length; i++) {
+        if (this.hasRowConflictAt(i) === true) {
+          return true;
+        }
+      }
+      return false; 
+    },
 
 
     // COLUMNS - run from top to bottom
